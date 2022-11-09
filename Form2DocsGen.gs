@@ -41,14 +41,14 @@ function onSubmit(e) {
         message += `【` +question.getItem().getTitle()+ `】\n ${answer}\n\n`;
         break;
     }
-    const timestamp = e.response.getTimestamp();
-    sheet.getRange(row, 2).setValue(Utilities.formatDate(timestamp, "JST", "yyyyMMdd"));
-    DocID= CreateNewDoc(Title);
-    sheet.getRange(row, 7).setValue(DocID);
-    ReplaceDoc(DocID,'{{Title}}', Title)
-    ReplaceDoc(DocID,'{{AuthorHandle}}', AuthorHandle)
-    ReplaceDoc(DocID,'{{Abstract}}', Abstract)
   }
+  const timestamp = e.response.getTimestamp();
+  sheet.getRange(row, 2).setValue(Utilities.formatDate(timestamp, "JST", "yyyyMMdd"));
+  DocID= CreateNewDoc(Title);
+  sheet.getRange(row, 7).setValue(DocID);
+  ReplaceDoc(DocID,'{{Title}}', Title)
+  ReplaceDoc(DocID,'{{AuthorHandle}}', AuthorHandle)
+  ReplaceDoc(DocID,'{{Abstract}}', Abstract)
   const subject = "New Document is arrived";
   GmailApp.sendEmail("your mail address", subject, message);
 }
