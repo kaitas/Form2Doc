@@ -1,3 +1,4 @@
+// this is an example code on Google Apps Script, I recommend to modify based your own
 const spreadSheet = SpreadsheetApp.openById("(your form container Spredsheet ID)");
 const sheet = spreadSheet.getSheetByName("Sheet Name of Your Form data");
 const form = FormApp.openById("Your Google Form ID");
@@ -55,7 +56,7 @@ function onSubmit(e) {
 
 function CreateNewDoc(title){
   var date = new Date();
-  date.setDate(date.getDate() + 7);
+  date.setDate(date.getDate()); // may be not unique if you submit several times at a day!
   var formattedDate = Utilities.formatDate(date, "JST", "yyyyMMdd");
   var fileName = title;
   var sourcefile = DriveApp.getFileById("(template file ID)"); // give your template doc file
