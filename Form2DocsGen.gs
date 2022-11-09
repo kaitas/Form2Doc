@@ -43,9 +43,9 @@ function onSubmit(e) {
     }
   }
   const timestamp = e.response.getTimestamp();
-  sheet.getRange(row, 2).setValue(Utilities.formatDate(timestamp, "JST", "yyyyMMdd"));
+  sheet.getRange(row, 2).setValue(Utilities.formatDate(timestamp, "JST", "yyyyMMdd")); // ID is for the 2nd column
   DocID= CreateNewDoc(Title);
-  sheet.getRange(row, 7).setValue(DocID);
+  sheet.getRange(row, 8).setValue(DocID); // ID column (count your columns)
   ReplaceDoc(DocID,'{{Title}}', Title)
   ReplaceDoc(DocID,'{{AuthorHandle}}', AuthorHandle)
   ReplaceDoc(DocID,'{{Abstract}}', Abstract)
