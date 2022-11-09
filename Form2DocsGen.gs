@@ -1,7 +1,7 @@
 // this is an example code on Google Apps Script, I recommend to modify based your own
 const spreadSheet = SpreadsheetApp.openById("(your form container Spredsheet ID)");
 const sheet = spreadSheet.getSheetByName("Sheet Name of Your Form data");
-const form = FormApp.openById("Your Google Form ID");
+const form = FormApp.openById("(Your Google Form ID)");
 const folder = DriveApp.getFolderById("Your Drive Directory");
 
 function onSubmit(e) {
@@ -46,7 +46,7 @@ function onSubmit(e) {
   const timestamp = e.response.getTimestamp();
   sheet.getRange(row, 2).setValue(Utilities.formatDate(timestamp, "JST", "yyyyMMdd")); // ID is for the 2nd column
   DocID= CreateNewDoc(Title);
-  sheet.getRange(row, 8).setValue(DocID); // ID column (count your columns)
+  sheet.getRange(row, 8).setValue("https://docs.google.com/document/d/"+DocID); // ID column (count your columns)
   ReplaceDoc(DocID,'{{Title}}', Title)
   ReplaceDoc(DocID,'{{AuthorHandle}}', AuthorHandle)
   ReplaceDoc(DocID,'{{Abstract}}', Abstract)
@@ -60,7 +60,7 @@ function CreateNewDoc(title){
   var formattedDate = Utilities.formatDate(date, "JST", "yyyyMMdd");
   var fileName = title;
   var sourcefile = DriveApp.getFileById("(template file ID)"); // give your template doc file
-  newfile = sourcefile.makeCopy( formattedDate + "-(執筆開始)" + fileName);
+  newfile = sourcefile.makeCopy( formattedDate + "-(temp)" + fileName);
   var doc = DocumentApp.openById(newfile.getId());
   Logger.log(doc.getName());
   return doc.getId();
@@ -68,7 +68,7 @@ function CreateNewDoc(title){
 
 function ReplaceDoc(_docID, _Keyword, _NewText) {
   let doc = DocumentApp.openById(_docID)
-  let docbody = doc.getBody(); // documents の本体を取得  
+  let docbody = doc.getBody(); 
   docbody.replaceText(_Keyword,_NewText);  
   doc.saveAndClose(); 
 }
